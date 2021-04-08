@@ -1,0 +1,66 @@
+s what Tasker will need to do to allow this:
+
+Add to the manifest XML:
+
+<uses-permission android:name="com.wireguard.android.permission.CONTROL_TUNNELS"/>
+Add to your program:
+
+ActivityCompat.requestPermissions(this, new String[]{"com.wireguard.android.permission.CONTROL_TUNNELS"}, someRequestNumber)
+https://developer.android.com/reference/androidx/core/app/ActivityCompat#requestPermissions(android.app.Activity,%20java.lang.String[],%20int)
+
+After the permission is granted, you will be able to send tunnel up/down requests to WireGuard:
+
+App: com.wireguard.android
+
+Intent: com.wireguard.android.action.SET_TUNNEL_UP
+
+Intent: com.wireguard.android.action.SET_TUNNEL_DOWN
+Intent extra: "tunnel" = "SOME_TUNNEL_NAME"
+
+adb shell 
+pm list packages | grep wire      
+pm grant com.arlosoft.macrodroid android.permission.WRITE_SECURE_SETTINGS
+pm grant  com.wireguard.android.permission.CONTROL_TUNNELS
+pm grant com.arlosoft.macrodroid android.permission.WRITE_SECURE_SETTINGS
+pm grant com.wireguard.android android.permission.CONTROL_TUNNELS 
+pm grant --user 0   com.arlosoft.macrodroid com.wireguard.android.permission.CONTROL_TUNNELS
+pm grant   com.wireguard.android com.wireguard.android.permission.CONTROL_TUNNELS
+
+adb -d shell pm grant com.oasisfeng.greenify android.permission.DUMP
+Accessibility service run-on-demand:
+adb -d shell pm grant com.oasisfeng.greenify android.permission.WRITE_SECURE_SETTINGS
+Aggressive Doze on Android 7.0+ (non-root):
+adb -d shell pm grant com.oasisfeng.greenify android.permission.WRITE_SECURE_SETTINGS
+Doze on the Go:
+adb -d shell pm grant com.oasisfeng.greenify android.permission.DUMP
+Aggressive Doze (on device/ROM with Doze disabled):
+adb -d shell pm grant com.oasisfeng.greenify android.permission.DUMP
+Wake-up Tracker:
+adb -d shell pm grant com.oasisfeng.greenify android.permission.READ_LOGS
+Wake-up Cut-off: (Android 4.4~5.x)
+adb -d shell pm grant com.oasisfeng.greenify android.permission.READ_LOGS
+adb -d shell pm grant com.oasisfeng.greenify android.permission.WRITE_SECURE_SETTINGS
+Background-free enforcement on Android 8+ (non-root):
+adb -d shell pm grant com.oasisfeng.greenify android.permission.GET_APP_OPS_STATS
+
+adb shell "pm list packages"|cut -f 2 -d ":"
+
+pm grant net.jroot3d.joneplustools android.permission.WRITE_SECURE_SETTINGS
+
+pm grant  com.arlosoft.macrodroid android.permission.WRITE_SECURE_SETTINGS
+
+App: com.wireguard.android
+
+Intent: com.wireguard.android.action.SET_TUNNEL_UP
+
+Intent: com.wireguard.android.action.SET_TUNNEL_DOWN
+
+Intent extra: "tunnel" = "SOME_TUNNEL_NAME"
+
+
+am broadcast -a  com.wireguard.android.action.SET_TUNNEL_UP -n com.wireguard.android/.TunnelToggleActivity --es tunnel Asgard   
+
+am broadcast -a  com.wireguard.android.action.SET_TUNNEL_UP -n .model.TunnelManager$IntentReceiver --es tunner Asgard
+adb shell am broadcast -a com.whereismywifeserver.intent.TEST 
+--es sms_body "test from adb"
+
