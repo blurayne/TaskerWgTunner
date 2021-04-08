@@ -10,6 +10,8 @@ I usually don’t do Android apps or Kotlin so feel free to improve on this.
 
 This section needs to be updated. I use a [MacroDroid](https://www.macrodroid.com/) with Android QuickTile and with following config.
 
+NOTE: Asgard is both name of my home server and the tunnel.
+
 ##### App Intend Config
 
 `````net.evolution515.taskerwgtunnel/.MainActivity%IntentReceiver
@@ -21,7 +23,7 @@ com.wireguard.android.action.SET_TUNNEL_UP
 ````
 
 ```
-tunnek="TunnelName"
+tunnel="Asgard"
 ```
 
 ##### MacroDroid
@@ -42,7 +44,7 @@ termux-toast -s "Asgard is now asleep"
 
 ## Debugging
 
-You can use something like that for debuggin
+You can use something like that for debugging
 
 ```bash
  am broadcast -a com.wireguard.android.action.SET_TUNNEL_UP -n 'net.evolution515.taskerwgtunnel/.MainActivity$IntentReceiver' --es tunnel Asgard
